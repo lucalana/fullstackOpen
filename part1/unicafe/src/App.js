@@ -1,7 +1,14 @@
 import { useState } from 'react'
 
 const Botao = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
-const StaticLine = ({text, value}) => <div>{text} {value}</div>
+const StaticLine = ({text, value}) => {
+  return <>
+      <tr>
+          <td>{text}</td>
+          <td> {value}</td>
+        </tr>
+  </>
+}
 const Statics = ({ good, bad, neutral }) => {
 
   if (good == 0 && bad == 0 && neutral == 0) {
@@ -11,13 +18,26 @@ const Statics = ({ good, bad, neutral }) => {
   }
 
   return <>
-      <h2>Statics</h2>
-      <div>good {good}</div>
-      <div>neutral {neutral}</div>
-      <div>bad {bad}</div>
-      <StaticLine text="all" value={bad + good + neutral}/>
-      <StaticLine text="average" value={(bad + good + neutral)/3}/>
-      <StaticLine text="positive" value={(good/(bad + good + neutral))*100}/>
+      <h2>Statistics</h2>
+      <table>
+        <tbody>
+            <tr>
+              <td>good</td>
+              <td> {good}</td>
+            </tr>
+            <tr>
+              <td>neutral</td>
+              <td> {neutral}</td>
+            </tr>
+            <tr>
+              <td>bad</td>
+              <td> {bad}</td>
+            </tr>
+          <StaticLine text="all" value={bad + good + neutral}/>
+          <StaticLine text="average" value={(bad + good + neutral)/3}/>
+          <StaticLine text="positive" value={(good/(bad + good + neutral))*100}/>
+        </tbody>
+      </table>
   </> 
 }
 
