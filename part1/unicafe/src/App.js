@@ -1,6 +1,17 @@
 import { useState } from 'react'
 
 const Botao = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
+const Statics = ({ good, bad, neutral }) => {
+  return <>
+        <h2>Statics</h2>
+      <div>good {good}</div>
+      <div>neutral {neutral}</div>
+      <div>bad {bad}</div>
+      <div>all {bad + good + neutral}</div>
+      <div>average {(bad + good + neutral)/3}</div>
+      <div>possitve {(good/(bad + good + neutral))*100} %</div>
+  </> 
+}
 
 const App = () => {
   const [good, addGood] = useState(0)
@@ -17,13 +28,7 @@ const App = () => {
       <Botao onClick={() => addNeutra(neutral + 1)} text="neutral"/>
       <Botao onClick={() => addBad(bad + 1)} text="bad"/>
 
-      <h2>Statics</h2>
-      <div>good {good}</div>
-      <div>neutral {neutral}</div>
-      <div>bad {bad}</div>
-      <div>all {bad + good + neutral}</div>
-      <div>average {(bad + good + neutral)/3}</div>
-      <div>possitve {(good/(bad + good + neutral))*100} %</div>
+    <Statics good={good} neutral={neutral} bad={bad}/>
 
     </div>
   )
