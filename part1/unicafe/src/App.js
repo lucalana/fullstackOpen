@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 const App = () => {
+  const [mostVote, setMostVote] = useState(0)
   const [selected, setSelected] = useState(0)
   const [anecdotes, setVote] = useState([
     {
@@ -40,6 +41,11 @@ function votar() {
   let a = [...anecdotes]
   a[selected].vote = a[selected].vote + 1 
   setVote(a)
+  anecdotes.forEach((a, index) => {
+    if (a.vote > anecdotes[mostVote].vote) {
+      setMostVote(index)
+    }
+  })
 }
 
 function next() {
@@ -48,20 +54,41 @@ function next() {
   } else {
     setSelected(selected + 1)
   }
+  anecdotes.forEach((a, index) => {
+    if (a.vote > anecdotes[mostVote].vote) {
+      setMostVote(index)
+    }
+  })
 }
 
   return (
     <div>
       <div>
         <div>
-          {anecdotes[selected].anecdote}
+          <h1>
+            Anecdote of the day
+          </h1>
+          <div>
+            {anecdotes[selected].anecdote}
+          </div>
+          <div>
+            has {anecdotes[selected].vote} votes
+          </div>
         </div>
-        <div>
-          has {anecdotes[selected].vote} votes
-        </div>
+        <button onClick={votar}>Votar</button>
+        <button onClick={next}>Proxima</button>
       </div>
-      <button onClick={votar}>Votar</button>
-      <button onClick={next}>Proxima</button>
+      <div>
+          <h1>
+            Anecdote with most votes
+          </h1>
+           <div>
+            {anecdotes[mostVote].anecdote}
+          </div>
+          <div>
+            has {anecdotes[mostVote].vote} votes
+          </div>
+      </div>
 
     </div>
   )
