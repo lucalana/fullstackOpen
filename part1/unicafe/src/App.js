@@ -2,8 +2,15 @@ import { useState } from 'react'
 
 const Botao = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 const Statics = ({ good, bad, neutral }) => {
+
+  if (good == 0 && bad == 0 && neutral == 0) {
+    return <>
+      <h2>no feedback given</h2>
+    </>
+  }
+
   return <>
-        <h2>Statics</h2>
+      <h2>Statics</h2>
       <div>good {good}</div>
       <div>neutral {neutral}</div>
       <div>bad {bad}</div>
