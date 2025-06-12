@@ -1,62 +1,24 @@
 import { useState } from 'react'
 
-const Botao = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
-const StaticLine = ({text, value}) => {
-  return <>
-      <tr>
-          <td>{text}</td>
-          <td> {value}</td>
-        </tr>
-  </>
-}
-const Statics = ({ good, bad, neutral }) => {
-
-  if (good == 0 && bad == 0 && neutral == 0) {
-    return <>
-      <h2>no feedback given</h2>
-    </>
-  }
-
-  return <>
-      <h2>Statistics</h2>
-      <table>
-        <tbody>
-            <tr>
-              <td>good</td>
-              <td> {good}</td>
-            </tr>
-            <tr>
-              <td>neutral</td>
-              <td> {neutral}</td>
-            </tr>
-            <tr>
-              <td>bad</td>
-              <td> {bad}</td>
-            </tr>
-          <StaticLine text="all" value={bad + good + neutral}/>
-          <StaticLine text="average" value={(bad + good + neutral)/3}/>
-          <StaticLine text="positive" value={(good/(bad + good + neutral))*100}/>
-        </tbody>
-      </table>
-  </> 
-}
-
 const App = () => {
-  const [good, addGood] = useState(0)
-  const [neutral, addNeutra] = useState(0)
-  const [bad, addBad] = useState(0)
-
-
-
+  const anecdotes = [
+    'Se fazer algo dói, faça isso com mais frequência.',
+    'Contratar mão de obra para um projeto de software que já está atrasado, faz com que se atrase mais ainda!',
+    'Os primeiros 90% do código correspondem aos primeiros 10% do tempo de desenvolvimento... Os outros 10% do código correspondem aos outros 90% do tempo de desenvolvimento.',
+    'Qualquer tolo escreve código que um computador consegue entender. Bons programadores escrevem código que humanos conseguem entender.',
+    'Otimização prematura é a raiz de todo o mal.',
+    'Antes de mais nada, depurar é duas vezes mais difícil do que escrever o código. Portanto, se você escrever o código da forma mais inteligente possível, você, por definição, não é inteligente o suficiente para depurá-lo.',
+    'Programar sem o uso extremamente intenso do console.log é o mesmo que um médico se recusar a usar raio-x ou testes sanguíneos ao diagnosticar pacientes.',
+    'A única maneira de ir rápido é ir bem.'
+  ]
+   
+  const [selected, setSelected] = useState(0)
   return (
     <div>
-      <h1>Give feedback</h1>
-
-      <Botao onClick={() => addGood(good + 1)} text="good"/>
-      <Botao onClick={() => addNeutra(neutral + 1)} text="neutral"/>
-      <Botao onClick={() => addBad(bad + 1)} text="bad"/>
-
-    <Statics good={good} neutral={neutral} bad={bad}/>
+      <div>
+      {anecdotes[selected]}
+      </div>
+      <button onClick={() => setSelected(Number.parseInt(anecdotes.length * Math.random()))}>Outra</button>
 
     </div>
   )
